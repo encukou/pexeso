@@ -38,3 +38,20 @@ def test_vyberu_karty():
     assert vyber_kartu(stav, 0, 1) == (0, 'A')
     assert vyber_kartu(stav, 2, 3) == (5, 'A')
     assert vyber_kartu(stav, 3, 3) == (7, 'A')
+
+def test_zamichani():
+    stav = zamichej_karty()
+    assert len(stav) == 4
+    prvky = []
+    for radek in stav:
+        assert len(radek) == 4
+        prvky += radek
+    for cislo in range(8):
+        for pismeno in 'C', 'A':
+            prvek = cislo, pismeno
+            assert prvky.count(prvek) == 1
+
+def test_nahodneho_zamichani():
+    # (Tehnle test v jednom z 20922789888000
+    # případů neprojde)
+    assert zamichej_karty() != zamichej_karty()
