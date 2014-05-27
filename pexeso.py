@@ -39,19 +39,18 @@ def vyber_kartu(seznam,radek,sloupec): # kdyz zavolam s argumentem(stav,0,0), vr
 def zamichej_karty(): # funkce shuffle v modulu random zamicha seznam
 	seznam_karet = []
 	seznam_zamichanych_karet = []
-	
+	otoceno = False
 	for cislo in range(8):
 		for pismeno in "cesky", "anglicky":
-			prvek = (cislo,pismeno)
+			prvek = (cislo,pismeno,otoceno)
 			seznam_karet.append(prvek)
 	shuffle(seznam_karet)
 	for neco in range(4):
 		index = neco * 4
 		seznam_zamichanych_karet.append(seznam_karet[index:index+4])		
 	return (seznam_zamichanych_karet)
-	
+print (zamichej_karty())	
 
-	
 
 def vypis_stav(seznam_karet):
 	delka = zjisti_delku_nejdelsiho_slova()
@@ -60,7 +59,7 @@ def vypis_stav(seznam_karet):
 			cislo = karta[0]
 			jazyk = karta[1]
 			
-			print (slovo_podle_indexu(cislo, jazyk).ljust(delka),end=" ")
+			print (slovo_podle_indexu(cislo, jazyk).ljust(delka),end=" ") # end=" " dela v python 3.4 to same, co carka
 		print ()
 vypis_stav(zamichej_karty())	
 
