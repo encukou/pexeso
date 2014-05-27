@@ -41,7 +41,19 @@ def zamichej_karty(): # funkce shuffle v modulu random zamicha seznam
 		index = neco * 4
 		seznam_zamichanych_karet.append(seznam_karet[index:index+4])		
 	return (seznam_zamichanych_karet)
-pprint.pprint (zamichej_karty())	
+	
+def vypis_stav(seznam_karet):
+	seznam_slov = []
+	for radek in seznam_karet:
+		for karta in radek:
+			cislo = karta[0]
+			jazyk = karta[1]
+			
+			print (slovo_podle_indexu(cislo, jazyk))
+		
+vypis_stav(zamichej_karty())	
+
+
 
 # funkce vs. metoda: metodu volam na objektu = napisu seznam.append, u funkce vkladam objekt jako argument - pisu shuffle(seznam_karet)	
 		
