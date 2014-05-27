@@ -58,8 +58,10 @@ def vypis_stav(seznam_karet):
 		for karta in radek:
 			cislo = karta[0]
 			jazyk = karta[1]
-			
-			print (slovo_podle_indexu(cislo, jazyk).ljust(delka),end=" ") # end=" " dela v python 3.4 to same, co carka
+			if karta[2]:
+				print (slovo_podle_indexu(cislo, jazyk).ljust(delka),end=" ") # end=" " dela v python 3.4 to same, co carka
+			else:
+				print (delka*"?",end=" ")
 		print ()
 vypis_stav(zamichej_karty())	
 
