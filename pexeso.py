@@ -16,6 +16,14 @@ with open(cesta) as soubor:
         slova.append(radek.split())
 
 def slovo_podle_indexu(cislo, jazyk):
+    """Najde v našich datech dané slovo
+
+    např. první slovo je Sluníčko,
+    >>> slovo_podle_indexu(0, 'C')
+    'Sluníčko'
+    >>> slovo_podle_indexu(0, 'A')
+    'Sun'
+    """
     radek = slova[cislo]
     if jazyk == 'C':
         return radek[0]
@@ -25,11 +33,13 @@ def slovo_podle_indexu(cislo, jazyk):
         raise ValueError(jazyk)
 
 def vyber_kartu(stav, cislo_radku, cislo_sloupce):
+    """Vybere kartu ze stavu na dané pozici"""
     radek = stav[cislo_radku]
     prvek = radek[cislo_sloupce]
     return prvek
 
 def zamichej_karty():
+    """Vrátí nový zamíchaný stav"""
     karty = []
     for cislo in range(8):
         for pismeno in 'CA':
