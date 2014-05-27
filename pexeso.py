@@ -60,6 +60,26 @@ def zamichej_karty():
         stav.append(karty[index:index + 4])
     return stav
 
+def otoc_kartu(stav, radek, sloupec, nove_otoceni):
+    cislo, pismeno, stare_otoceni = stav[radek][sloupec]
+    stav[radek][sloupec] = cislo, pismeno, nove_otoceni
+
+
+def udelej_tah(hra, radek, sloupec):
+    if hra['aktivni_karta']:
+        akt_radek, akt_sloupec = hra['aktivni_karta']
+        aktivni_obrazek = vyber_kartu(hra['stav'], akt_radek, akt_sloupec)[0]
+        nove_otoceny_obrazek = vyber_kartu(hra['stav'], radek, sloupec)[0]
+        if nove_otoceny_obrazek == aktivni_obrazek:
+            otoc_kartu(hra['stav'], radek, sloupec, True)
+        else:
+            otoc_kartu(hra['stav'], akt_radek, akt_sloupec, False)
+        hra['aktivni_karta'] = None
+    else:
+        otoc_kartu(hra['stav'], radek, sloupec, True)
+        hra['aktivni_karta'] = radek, sloupec
+    return hra
+
 
 def vypis_stav(stav):
     for radek in stav:
