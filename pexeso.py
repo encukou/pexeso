@@ -54,13 +54,13 @@ def zamichej_karty(): # funkce shuffle v modulu random zamicha seznam
 	
 
 def vypis_stav(seznam_karet):
-	
+	delka = zjisti_delku_nejdelsiho_slova()
 	for radek in seznam_karet:
 		for karta in radek:
 			cislo = karta[0]
 			jazyk = karta[1]
 			
-			print (slovo_podle_indexu(cislo, jazyk).ljust(zjisti_delku_nejdelsiho_slova()),end=" ")
+			print (slovo_podle_indexu(cislo, jazyk).ljust(delka),end=" ")
 		print ()
 vypis_stav(zamichej_karty())	
 
