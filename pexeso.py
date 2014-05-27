@@ -10,7 +10,7 @@ with open (cesta) as soubor:
 		if radek.strip():
 			slova.append(radek.split())
 
-def zjisti_delku_slova():
+def zjisti_delku_nejdelsiho_slova():
 	delka = 0
 	for radek in slova:
 		for slovo in radek:
@@ -60,7 +60,7 @@ def vypis_stav(seznam_karet):
 			cislo = karta[0]
 			jazyk = karta[1]
 			
-			print (slovo_podle_indexu(cislo, jazyk).ljust(zjisti_delku_slova()),end=" ")
+			print (slovo_podle_indexu(cislo, jazyk).ljust(zjisti_delku_nejdelsiho_slova()),end=" ")
 		print ()
 vypis_stav(zamichej_karty())	
 
