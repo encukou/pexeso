@@ -3,14 +3,22 @@ from random import shuffle
 import os.path
 
 slova = []
+
 cesta = os.path.join(os.path.dirname(__file__), 'slova.txt') # dirname najde jmeno adresare, kde je soubor zatim (slova), join vlozi slova za nazev te cesty
 with open (cesta) as soubor:
 	for radek in soubor:
 		if radek.strip():
 			slova.append(radek.split())
-		
 
+def zjisti_delku_slova():
+	delka = 0
+	for radek in slova:
+		for slovo in radek:
+			if len(slovo) > delka:
+				delka = len(slovo)
+	return delka
 
+	
 def slovo_podle_indexu(cislo, jazyk):
 	if jazyk == "cesky":
 		index = 0
@@ -42,14 +50,17 @@ def zamichej_karty(): # funkce shuffle v modulu random zamicha seznam
 		seznam_zamichanych_karet.append(seznam_karet[index:index+4])		
 	return (seznam_zamichanych_karet)
 	
+
+	
+
 def vypis_stav(seznam_karet):
-	seznam_slov = []
+	
 	for radek in seznam_karet:
 		for karta in radek:
 			cislo = karta[0]
 			jazyk = karta[1]
 			
-			print (slovo_podle_indexu(cislo, jazyk),end=" ")
+			print (slovo_podle_indexu(cislo, jazyk).ljust(zjisti_delku_slova()),end=" ")
 		print ()
 vypis_stav(zamichej_karty())	
 
