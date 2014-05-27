@@ -49,8 +49,8 @@ def vypis_stav(seznam_karet):
 			cislo = karta[0]
 			jazyk = karta[1]
 			
-			print (slovo_podle_indexu(cislo, jazyk))
-		
+			print (slovo_podle_indexu(cislo, jazyk),end=" ")
+		print ()
 vypis_stav(zamichej_karty())	
 
 
