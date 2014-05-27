@@ -8,6 +8,11 @@ zakladni_stav = [
     [(6, 'C', False), (6, 'A', False), (7, 'C', False), (7, 'A', False)],
 ]
 
+zakladni_hra = {
+    'stav': zakladni_stav,
+    'aktivni_karta': None,
+}
+
 
 def test_slovo_podle_indexu():
     assert pexeso.slovo_podle_indexu(1, 'C') == 'Kolečko'
@@ -38,3 +43,33 @@ def test_nahodneho_zamichani():
     # (Tehnle test v jednom z 20922789888000
     # případů neprojde)
     assert pexeso.zamichej_karty() != pexeso.zamichej_karty()
+
+
+def zkontroluj_otoceni(stav, otocene_karty):
+    for radek in range(4):
+        for sloupec in range(4):
+            prvek = pexeso.vyber_kartu(stav, radek, sloupec)
+            if (radek, sloupec) in otocene_karty:
+                assert prvek[2] == True
+            else:
+                assert prvek[2] == False
+
+
+def test_hry():
+    hra = zakladni_hra
+
+    hra = pexeso.udelej_tah(hra, 1, 2)
+    zkontroluj_otoceni(hra['stav'], [(1, 2)])
+    assert hra['aktivni_karta'] == (1, 2)
+
+    hra = pexeso.udelej_tah(hra, 0, 0)
+    zkontroluj_otoceni(hra['stav'], [])
+    assert hra['aktivni_karta'] == None
+
+    hra = pexeso.udelej_tah(hra, 1, 2)
+    zkontroluj_otoceni(hra['stav'], [(1, 2)])
+    assert hra['aktivni_karta'] == (1, 2)
+
+    hra = pexeso.udelej_tah(hra, 1, 3)
+    zkontroluj_otoceni(hra['stav'], [(1, 2), (1, 3)])
+    assert hra['aktivni_karta'] == None
