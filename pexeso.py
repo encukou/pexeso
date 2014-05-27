@@ -1,8 +1,16 @@
 import pprint
+import os.path
 
 slova = []
 
-with open('slova.txt') as soubor:
+# Najdeme cestu k datovému souboru
+# Proměnnou __file__ Python automaticky nastaví na cestu k aktuálnímu programu
+#   (souboru .py)
+# Funkce os.path.dirname vrátí jméno adresáře, ve kterém se nachází daný soubor
+# Funkce os.path.join spojuje jména adresářů, podadresářů a souborů
+# Výsledek je, že v `cesta` bude cesta k našemu datovému souboru
+cesta = os.path.join(os.path.dirname(__file__), 'slova.txt')
+with open(cesta) as soubor:
     for radek in soubor:
         slova.append(radek.split())
 
