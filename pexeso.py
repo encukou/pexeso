@@ -66,6 +66,8 @@ def vypis_stav(stav):
         for karta in radek:
             cislo, pismeno, otoceno = karta
             slovo = slovo_podle_indexu(cislo, pismeno)
+            if not otoceno:
+                slovo = '?' * len(slovo)
             print(slovo.ljust(delka_nejdelsiho_slova), end=' ')
         print()
 
