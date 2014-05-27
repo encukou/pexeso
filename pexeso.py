@@ -1,3 +1,4 @@
+import random
 import pprint
 import os.path
 
@@ -46,6 +47,18 @@ def test_vyberu_karty():
     assert vyber_kartu(stav, 0, 1) == (0, 'A')
     assert vyber_kartu(stav, 2, 3) == (5, 'A')
     assert vyber_kartu(stav, 3, 3) == (7, 'A')
+
+def zamichej_karty():
+    karty = []
+    for cislo in range(8):
+        for pismeno in 'CA':
+            karty.append((cislo, pismeno))
+    random.shuffle(karty)
+    stav = []
+    for radek in range(4):
+        index = radek * 4
+        stav.append(karty[index:index + 4])
+    return stav
 
 def test_zamichani():
     stav = zamichej_karty()
