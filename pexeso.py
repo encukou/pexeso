@@ -11,9 +11,15 @@ slova = []
 # Funkce os.path.join spojuje jména adresářů, podadresářů a souborů
 # Výsledek je, že v `cesta` bude cesta k našemu datovému souboru
 cesta = os.path.join(os.path.dirname(__file__), 'slova.txt')
+delka_nejdelsiho_slova = 0
 with open(cesta) as soubor:
     for radek in soubor:
         slova.append(radek.split())
+
+for radek in slova:
+    for slovo in radek:
+        if len(slovo) > delka_nejdelsiho_slova:
+            delka_nejdelsiho_slova = len(slovo)
 
 
 def slovo_podle_indexu(cislo, jazyk):
@@ -46,7 +52,7 @@ def zamichej_karty():
     karty = []
     for cislo in range(8):
         for pismeno in 'CA':
-            karty.append((cislo, pismeno))
+            karty.append((cislo, pismeno, False))
     random.shuffle(karty)
     stav = []
     for radek in range(4):
@@ -58,8 +64,9 @@ def zamichej_karty():
 def vypis_stav(stav):
     for radek in stav:
         for karta in radek:
-            cislo, pismeno = karta
-            print(slovo_podle_indexu(cislo, pismeno), end=' ')
+            cislo, pismeno, otoceno = karta
+            slovo = slovo_podle_indexu(cislo, pismeno)
+            print(slovo.ljust(delka_nejdelsiho_slova), end=' ')
         print()
 
 
