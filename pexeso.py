@@ -35,6 +35,12 @@ def vyber_kartu(stav,radek,sloupec): # kdyz zavolam s argumentem(stav,0,0), vrat
 		return stav[radek][sloupec]
 		
 
+def vytvor_hru(stav):
+	zakladni_hra = {
+		'stav': stav,
+		'aktivni_karta': None,
+	}
+	return zakladni_hra
 
 def zamichej_karty(): # funkce shuffle v modulu random zamicha seznam
 	seznam_karet = []
@@ -49,7 +55,7 @@ def zamichej_karty(): # funkce shuffle v modulu random zamicha seznam
 		index = neco * 4
 		seznam_zamichanych_karet.append(seznam_karet[index:index+4])		
 	return (seznam_zamichanych_karet)
-print (zamichej_karty())	
+	
 
 
 def vypis_stav(seznam_karet):
@@ -63,7 +69,7 @@ def vypis_stav(seznam_karet):
 			else:
 				print (delka*"?",end=" ")
 		print ()
-vypis_stav(zamichej_karty())	
+	
 
 """zakladni_stav = [
     [(0, 'C', False), (0, 'A', False), (1, 'C', False), (1, 'A', False)],

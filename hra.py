@@ -1,6 +1,7 @@
 import sys
 import os.path
 import pexeso
+from pprint import pprint
 
 def hrej():
 	"""1. dostane na prikazovem radku jmeno souboru
@@ -13,7 +14,11 @@ def hrej():
 	if os.path.exists(jmeno_souboru):
 		hra = pexeso.nacti_hru_ze_souboru(jmeno_souboru)
 	else:
-		hra = pexeso.zamichej_karty()
-	print (hra)
-	
+		hra = pexeso.vytvor_hru(pexeso.zamichej_karty())
+	pprint (hra)
+	radek = int(input("zadej radek"))
+	sloupec = int(input("zadej sloupec"))
+	nova_hra = pexeso.udelej_tah(hra, radek, sloupec)
+	pprint (nova_hra)
+	pexeso.zapis_hru_do_souboru(nova_hra,jmeno_souboru)
 hrej()

@@ -43,13 +43,8 @@ def vytvor_zakladni_stav():
 	return zakladni_stav
 
 def vytvor_zakladni_hru():
-	zakladni_stav = vytvor_zakladni_stav()
-	zakladni_hra = {
-    'stav': zakladni_stav,
-    'aktivni_karta': None,
-	}
-	return zakladni_hra
-
+	return pexeso.vytvor_hru(vytvor_zakladni_stav())
+	
 def zkontroluj_otoceni(stav, otocene_karty):
     for radek in range(4):
         for sloupec in range(4):
