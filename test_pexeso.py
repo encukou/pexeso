@@ -95,3 +95,10 @@ def test_hry():
     hra = pexeso.udelej_tah(hra, 1, 3)
     zkontroluj_otoceni(hra['stav'], [(1, 2), (1, 3)])
     assert hra['aktivni_karta'] == None
+	
+def test_zapis_do_souboru():
+	hra = vytvor_zakladni_hru()
+	pexeso.zapis_hru_do_souboru(hra,"stav_hry.txt")
+	pexeso.nacti_hru_ze_souboru("stav_hry.txt")
+	obsah_souboru = pexeso.nacti_hru_ze_souboru("stav_hry.txt")	
+	assert pexeso.vyber_kartu(obsah_souboru['stav'],0,0) == [0,"C", False] 

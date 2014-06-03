@@ -1,6 +1,7 @@
 ﻿import pprint
 from random import shuffle
 import os.path
+import json
 
 slova = []
 
@@ -96,6 +97,14 @@ def udelej_tah(hra, radek, sloupec):
 		hra['aktivni_karta'] = None
 	return hra
 
+def zapis_hru_do_souboru(hra,nazev_souboru):
+	with open (nazev_souboru, "w") as soubor:
+		soubor.write(json.dumps(hra)) #hra je slovnik a slovnik se neda jen tak zapsat do souboru, tak se na to musi dat ten dumps
+		
+def nacti_hru_ze_souboru(nazev_souboru):
+	with open (nazev_souboru, "r") as soubor:
+		obsah_souboru = soubor.read()
+		return json.loads(obsah_souboru) #zmeni retezec zpatky na slovnik
 # funkce vs. metoda: metodu volam na objektu = napisu seznam.append, u funkce vkladam objekt jako argument - pisu shuffle(seznam_karet)	
 		
 	
