@@ -15,10 +15,12 @@ def hrej():
 		hra = pexeso.nacti_hru_ze_souboru(jmeno_souboru)
 	else:
 		hra = pexeso.vytvor_hru(pexeso.zamichej_karty())
-	pprint (hra)
-	radek = int(input("zadej radek"))
-	sloupec = int(input("zadej sloupec"))
+	pexeso.vypis_stav(hra['stav'])
+	
+	radek = int(input("zadej radek")) - 1
+	sloupec = int(input("zadej sloupec")) - 1
 	nova_hra = pexeso.udelej_tah(hra, radek, sloupec)
-	pprint (nova_hra)
+	pexeso.vypis_stav(nova_hra['stav'])
+	
 	pexeso.zapis_hru_do_souboru(nova_hra,jmeno_souboru)
 hrej()
