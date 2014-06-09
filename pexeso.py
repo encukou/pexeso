@@ -1,6 +1,7 @@
 import random
 import pprint
 import os.path
+import json
 
 slova = []
 
@@ -103,4 +104,13 @@ def vypis_stav(stav):
         print()
 
 
-vypis_stav(zamichej_karty())
+def uloz_hru_do_souboru(hra, cesta):
+    """Uloží hru do daného souboru"""
+    with open(cesta, 'w') as soubor:
+        soubor.write(json.dumps(hra))
+
+
+def nacti_hru_ze_souboru(cesta):
+    """Načte hru z daného souboru"""
+    with open(cesta) as soubor:
+        return json.loads(soubor.read())

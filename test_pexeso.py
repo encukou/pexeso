@@ -101,5 +101,5 @@ def test_souboru():
     hra = vytvor_zakladni_hru()
     pexeso.uloz_hru_do_souboru(hra, '/tmp/pexeso-test')
     nactena_hra = pexeso.nacti_hru_ze_souboru('/tmp/pexeso-test')
-    assert pexeso.vyber_kartu(nactena_hra['stav'], 0, 0) == (0, 'C', False)
+    assert pexeso.vyber_kartu(nactena_hra['stav'], 0, 0) == [0, 'C', False]
     assert nactena_hra['aktivni_karta'] is None
