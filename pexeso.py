@@ -48,7 +48,12 @@ def vyber_kartu(stav, cislo_radku, cislo_sloupce):
 
 
 def zamichej_karty():
-    """Vrátí nový zamíchaný stav"""
+    """Vrátí nový zamíchaný stav
+
+    Stav je seznam seznamů (dvojrozměrné pole) trojic (číslo, jazyk, otočení),
+    kde číslo je číslo dvojice, jazyk je 'C' nebo 'A', a otočení je True pokud
+    je karta lícem nahoru.
+    """
     karty = []
     for cislo in range(8):
         for pismeno in 'CA':
@@ -66,22 +71,28 @@ def otoc_kartu(stav, radek, sloupec, nove_otoceni):
 
 
 def udelej_tah(hra, radek, sloupec):
+    """Táhne na zadaném řádku a sloupci"""
     if hra['aktivni_karta']:
+        # hráč táhnul minule, teď dokončí kolo otočením další karty
         akt_radek, akt_sloupec = hra['aktivni_karta']
         aktivni_obrazek = vyber_kartu(hra['stav'], akt_radek, akt_sloupec)[0]
         nove_otoceny_obrazek = vyber_kartu(hra['stav'], radek, sloupec)[0]
         if nove_otoceny_obrazek == aktivni_obrazek:
+            # hurá!
             otoc_kartu(hra['stav'], radek, sloupec, True)
         else:
+            # smůla
             otoc_kartu(hra['stav'], akt_radek, akt_sloupec, False)
         hra['aktivni_karta'] = None
     else:
+        # začátek kola, otočení první karty
         otoc_kartu(hra['stav'], radek, sloupec, True)
         hra['aktivni_karta'] = radek, sloupec
     return hra
 
 
 def vypis_stav(stav):
+    """Vypíše stav na obrazovku"""
     for radek in stav:
         for karta in radek:
             cislo, pismeno, otoceno = karta
