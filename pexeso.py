@@ -109,6 +109,12 @@ def udelej_tah(hra, radek, sloupec):
 			otoc_kartu(hra['stav'],radek,sloupec,True)
 			hra['aktivni_karta'].append((radek,sloupec))
 	return hra
+	
+def ukonci_tah(hra):	
+	if hra['aktivni_karta'] != None and len(hra['aktivni_karta'])>2:
+		for radek,sloupec in hra['aktivni_karta']:
+			otoc_kartu(hra['stav'],radek,sloupec,False)
+		hra['aktivni_karta'] = None
 
 def zapis_hru_do_souboru(hra,nazev_souboru):
 	with open (nazev_souboru, "w") as soubor:

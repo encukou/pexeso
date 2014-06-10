@@ -25,6 +25,7 @@ def hrej():
 	pexeso.kontrola_vstupu(sloupec)
 	sloupec = int(sloupec) - 1
 	nova_hra = pexeso.udelej_tah(hra, radek, sloupec)
-	pexeso.vypis_stav(nova_hra['stav'])	
+	pexeso.vypis_stav(nova_hra['stav'])
+	pexeso.ukonci_tah(hra)
 	pexeso.zapis_hru_do_souboru(nova_hra,jmeno_souboru)
 hrej()
