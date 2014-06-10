@@ -97,16 +97,17 @@ def udelej_tah(hra, radek, sloupec):
 		raise ValueError("Karta je otocena")	
 	elif  hra['aktivni_karta'] == None:
 		otoc_kartu(hra['stav'],radek,sloupec,True)
-		hra['aktivni_karta'] = (radek,sloupec)
+		hra['aktivni_karta'] = [(radek,sloupec)]
 	else:
-		aktivni_radek, aktivni_sloupec = hra['aktivni_karta']
+		aktivni_radek, aktivni_sloupec = hra['aktivni_karta'][0]
 		nove_otoceny_obrazek = vyber_kartu(hra['stav'],radek,sloupec)[0]
 		puvodni_obrazek = vyber_kartu(hra['stav'],aktivni_radek,aktivni_sloupec)[0]
 		if nove_otoceny_obrazek == puvodni_obrazek:
 			otoc_kartu(hra['stav'],radek,sloupec,True)
+			hra['aktivni_karta'] = None
 		else:
-			otoc_kartu(hra['stav'],aktivni_radek,aktivni_sloupec,False)
-		hra['aktivni_karta'] = None
+			otoc_kartu(hra['stav'],radek,sloupec,True)
+			hra['aktivni_karta'].append((radek,sloupec))
 	return hra
 
 def zapis_hru_do_souboru(hra,nazev_souboru):
