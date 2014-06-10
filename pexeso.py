@@ -10,6 +10,7 @@ with open (cesta) as soubor:
 	for radek in soubor:
 		if radek.strip():
 			slova.append(radek.split())
+			
 
 def zjisti_delku_nejdelsiho_slova():
 	delka = 0
@@ -90,9 +91,11 @@ def otoc_kartu(stav,radek,sloupec,nove_otoceni):
 	""" sem se maji napsat komentare k funkci """ 
 	cislo, jazyk, stare_otoceni = stav[radek][sloupec] # stav[radek][sloupec] vrati trojici, tu tuple, ve ktere mam cislo, jazyk, otoceni
 	stav[radek][sloupec] = cislo, jazyk, nove_otoceni
-
 def udelej_tah(hra, radek, sloupec):
-	if  hra['aktivni_karta'] == None:
+	
+	if (hra['stav'][radek][sloupec][2] == True):
+		raise ValueError("Karta je otocena")	
+	elif  hra['aktivni_karta'] == None:
 		otoc_kartu(hra['stav'],radek,sloupec,True)
 		hra['aktivni_karta'] = (radek,sloupec)
 	else:
@@ -116,8 +119,16 @@ def nacti_hru_ze_souboru(nazev_souboru):
 		return json.loads(obsah_souboru) #zmeni retezec zpatky na slovnik
 # funkce vs. metoda: metodu volam na objektu = napisu seznam.append, u funkce vkladam objekt jako argument - pisu shuffle(seznam_karet)	
 		
-	
+def kontrola_vstupu(cislo):
+	velikost_pexesa = (len(slova)/2)	
+	if cislo.isdigit() == False:
+		raise ValueError("Je potreba zadat cislo")
+	if int(cislo) > velikost_pexesa:
+		raise ValueError("Cislo musi byt mensi nez 5")
+		
 
+	
+"""pokud hrac zada spatny vstup, ktery bud neni cislo, nebo je vetsi nez ma byt nebo zada kartu, ktera je otocena, tak by to melo vyhodit chybovou hlasku"""
 
 		
 	

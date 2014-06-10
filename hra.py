@@ -11,16 +11,20 @@ def hrej():
 	5. udela tah a vypise novy stav hry
 	6. novy stav zapise do souboru (ktery dostane v argumentu """	
 	jmeno_souboru = sys.argv[1]
+	
 	if os.path.exists(jmeno_souboru):
 		hra = pexeso.nacti_hru_ze_souboru(jmeno_souboru)
 	else:
 		hra = pexeso.vytvor_hru(pexeso.zamichej_karty())
 	pexeso.vypis_stav(hra['stav'])
 	
-	radek = int(input("zadej radek")) - 1
-	sloupec = int(input("zadej sloupec")) - 1
+	radek = input("zadej radek")
+	pexeso.kontrola_vstupu(radek)
+	radek = int(radek) - 1
+	sloupec = input("zadej sloupec")
+	pexeso.kontrola_vstupu(sloupec)
+	sloupec = int(sloupec) - 1
 	nova_hra = pexeso.udelej_tah(hra, radek, sloupec)
-	pexeso.vypis_stav(nova_hra['stav'])
-	
+	pexeso.vypis_stav(nova_hra['stav'])	
 	pexeso.zapis_hru_do_souboru(nova_hra,jmeno_souboru)
 hrej()
