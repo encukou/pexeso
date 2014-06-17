@@ -1,5 +1,8 @@
 import pexeso
 
+"""test se nepousti s programem, ten si delam jenom pro sebe a poustim test.py, abych si mohla otestovat, jestli mi to jeste porad funguje, 
+kdyz jsem udelala zmenu. Poustim funkce, kterym dam nejake nahodne vstupy, abych videla, jeslti jeste stale funguji."""
+
 stav = [[(0,"cesky", False),(0,"anglicky", False),(1,"cesky", False),(1,"anglicky", False)],
 			[(2,"cesky",False),(2,"anglicky", False),(3,"cesky", False),(3,"anglicky", False)],
 			[(4,"cesky", False),(4,"anglicky", False),(5,"cesky", False),(5,"anglicky", False)],
@@ -55,42 +58,29 @@ def zkontroluj_otoceni(stav, otocene_karty):
                 assert prvek[2] == False
 
 def test_hry2():
-    hra = vytvor_zakladni_hru()
-    hra = pexeso.udelej_tah(hra, 1, 2)
-    zkontroluj_otoceni(hra['stav'], [(1, 2)])
-    assert hra['aktivni_karta'] == (1, 2)
-
-    hra = pexeso.udelej_tah(hra, 0, 0)
-    zkontroluj_otoceni(hra['stav'], [])
-    assert hra['aktivni_karta'] == None
-
-    hra = pexeso.udelej_tah(hra, 1, 2)
-    zkontroluj_otoceni(hra['stav'], [(1, 2)])
-    assert hra['aktivni_karta'] == (1, 2)
-
-    hra = pexeso.udelej_tah(hra, 1, 3)
-    zkontroluj_otoceni(hra['stav'], [(1, 2), (1, 3)])
-    assert hra['aktivni_karta'] == None
+	# hrac otoci prvni kartu, zkontroluje, jestli je otocena karta v aktivni karte
+	hra = vytvor_zakladni_hru()
+	hra = pexeso.udelej_tah(hra, 1, 2)
+	zkontroluj_otoceni(hra['stav'], [(1, 2)])
+	assert hra['aktivni_karta'] == [(1, 2)]
+	# hrac otoci druhou kartu, zkontroluje, jestli jsou obe dve karty v seznamu
+	hra = pexeso.udelej_tah(hra, 0, 0)
+	zkontroluj_otoceni(hra['stav'], [(1,2),(0,0)])
+	assert hra['aktivni_karta'] == [(1,2),(0,0)]
+	#zavola se ukonci tah a zkontroluje, jestli je seznam otocenych karet prazdny
+	pexeso.ukonci_tah(hra)
+	zkontroluj_otoceni(hra['stav'], [])
+	assert hra['aktivni_karta'] == None
+	
+	hra = pexeso.udelej_tah(hra, 1, 2)
+	zkontroluj_otoceni(hra['stav'], [(1, 2)])
+	assert hra['aktivni_karta'] == [(1, 2)]
+	#tentokrat se karty rovnaji, tak se zkontroluje, jestli se seznam zase vynuloval
+	hra = pexeso.udelej_tah(hra, 1, 3)
+	zkontroluj_otoceni(hra['stav'], [(1, 2), (1, 3)])
+	assert hra['aktivni_karta'] == None
 				
 
-def test_hry():
-    hra = vytvor_zakladni_hru()
-    hra = pexeso.udelej_tah(hra, 1, 2)
-    zkontroluj_otoceni(hra['stav'], [(1, 2)])
-    assert hra['aktivni_karta'] == (1, 2)
-
-    hra = pexeso.udelej_tah(hra, 0, 0)
-    zkontroluj_otoceni(hra['stav'], [])
-    assert hra['aktivni_karta'] == None
-
-    hra = pexeso.udelej_tah(hra, 1, 2)
-    zkontroluj_otoceni(hra['stav'], [(1, 2)])
-    assert hra['aktivni_karta'] == (1, 2)
-
-    hra = pexeso.udelej_tah(hra, 1, 3)
-    zkontroluj_otoceni(hra['stav'], [(1, 2), (1, 3)])
-    assert hra['aktivni_karta'] == None
-	
 def test_zapis_do_souboru():
 	hra = vytvor_zakladni_hru()
 	pexeso.zapis_hru_do_souboru(hra,"stav_hry.txt")

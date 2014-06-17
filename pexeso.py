@@ -111,7 +111,7 @@ def udelej_tah(hra, radek, sloupec):
 	return hra
 	
 def ukonci_tah(hra):	
-	if hra['aktivni_karta'] != None and len(hra['aktivni_karta'])>2:
+	if hra['aktivni_karta'] != None and len(hra['aktivni_karta'])==2:
 		for radek,sloupec in hra['aktivni_karta']:
 			otoc_kartu(hra['stav'],radek,sloupec,False)
 		hra['aktivni_karta'] = None
