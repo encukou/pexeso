@@ -6,7 +6,7 @@ import json
 slova = []
 
 cesta = os.path.join(os.path.dirname(__file__), 'slova.txt') # dirname najde jmeno adresare, kde je soubor zatim (slova), join vlozi slova za nazev te cesty
-with open (cesta) as soubor:
+with open (cesta, encoding='utf-8') as soubor:
 	for radek in soubor:
 		if radek.strip():
 			slova.append(radek.split())
